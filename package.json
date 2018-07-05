@@ -15,7 +15,8 @@
     "zeppelin-solidity": "^1.10.0"
   },
   "scripts": {
-    "start": "require-link && react-scripts start",
+    "env": "truffle exec ./scripts/env.js",
+    "start": "npm run env && require-link && react-scripts start",
     "build": "require-link && react-scripts build",
     "test": "require-link && react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
