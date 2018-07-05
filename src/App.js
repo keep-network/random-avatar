@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Avatar from 'avataaars';
+import Network from './network';
+import { getKeepRandomBeacon, getKeepRandomBeaconImplementation } from './contracts';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.getData();
+  }
+
   render() {
     return (
       <div className="App">
@@ -29,6 +36,19 @@ class App extends Component {
         </p>
       </div>
     );
+  }
+
+  async getData() {
+
+    // Your address
+    const accounts = await Network.getAccounts();
+    const yourAddress = accounts[0];
+
+    // Contracts
+    const keepRandomBeacon = await getKeepRandomBeacon(process.env.REACT_APP_RANDOM_BEACON_ADDRESS);
+    const keepRandomBeaconImplementation = await getKeepRandomBeaconImplementation(process.env.REACT_APP_RANDOM_BEACON_IMPLEMENTATION_ADDRESS);
+
+    this.setState();
   }
 }
 

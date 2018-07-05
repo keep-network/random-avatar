@@ -7,3 +7,10 @@ export async function getKeepRandomBeacon(address) {
   KeepRandomBeacon.setProvider(provider);
   return KeepRandomBeacon.at(address);
 }
+
+export async function getKeepRandomBeaconImplementation(address) {
+  const KeepRandomBeaconImplementation = contract(require('contracts/KeepRandomBeaconStub.json'));
+  const provider = await Network.provider();
+  KeepRandomBeaconImplementation.setProvider(provider);
+  return KeepRandomBeaconImplementation.at(address);
+}
