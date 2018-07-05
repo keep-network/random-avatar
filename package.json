@@ -22,6 +22,6 @@
     "eject": "react-scripts eject"
   },
   "requireSymlinks": {
-    "contracts": "../build/contracts"
+    "contracts": "./build/contracts"
   }
 }
