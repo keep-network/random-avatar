@@ -11,7 +11,6 @@ class App extends Component {
     super()
     this.state = {};
     this.options = {
-      avatarStyle: ['Circle', 'Transparent'],
       topType: ['Eyepatch', 'Hat', 'Hijab', 'LongHairBigHair', 'LongHairBob', 'LongHairBun', 'LongHairCurly', 'LongHairCurvy', 'LongHairDreads', 'LongHairFrida', 'LongHairFro', 'LongHairFroBand', 'LongHairMiaWallace', 'LongHairNotTooLong', 'LongHairShavedSides', 'LongHairStraight', 'LongHairStraight2', 'LongHairStraightStrand', 'NoHair', 'ShortHairDreads01', 'ShortHairDreads02', 'ShortHairFrizzle', 'ShortHairShaggy', 'ShortHairShaggyMullet', 'ShortHairShortCurly', 'ShortHairShortFlat', 'ShortHairShortRound', 'ShortHairShortWaved', 'ShortHairSides', 'ShortHairTheCaesar', 'ShortHairTheCaesarSidePart', 'Turban', 'WinterHat1', 'WinterHat2', 'WinterHat3', 'WinterHat4'],
       hatColor: ['Black', 'Blue01', 'Blue02', 'Blue03', 'Gray01', 'Gray02', 'Heather', 'PastelBlue', 'PastelGreen', 'PastelOrange', 'PastelRed', 'PastelYellow', 'Pink', 'Red', 'White'],
       accessoriesType: ['Blank', 'Kurt', 'Prescription01', 'Prescription02', 'Round', 'Sunglasses', 'Wayfarers'],
@@ -35,18 +34,17 @@ class App extends Component {
   }
 
   render() {
-    const {avatarStyle, topType, hatColor, accessoriesType, hairColor, facialHairType, clotheType, clotheColor, eyeType, eyebrowType, mouthType, skinColor} = this.state;
+    const {topType, hatColor, accessoriesType, hairColor, facialHairType, clotheType, clotheColor, eyeType, eyebrowType, mouthType, skinColor} = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+      <div className="container text-center">
+        <header>
+          <h1 className="m-5">Random avatar <sup>on blockchain</sup></h1>
         </header>
-        <button onClick={this.requestRelayEntry.bind(this)}>get random number</button>
-        <p className="App-intro">
+        <button className="btn btn-lg btn-secondary mb-5" onClick={this.requestRelayEntry.bind(this)}>Get random avatar!</button>
+        <div className="avatar">
           <Avatar
-            style={{width: '300px', height: '300px'}}
-            avatarStyle={avatarStyle}
+            style={{width: '400px', height: '400px'}}
+            avatarStyle='Circle'
             topType={topType}
             hatColor={hatColor}
             accessoriesType={accessoriesType}
@@ -59,7 +57,7 @@ class App extends Component {
             mouthType={mouthType}
             skinColor={skinColor}
           />
-        </p>
+        </div>
       </div>
     );
   }
