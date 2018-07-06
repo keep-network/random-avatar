@@ -12,3 +12,7 @@ h1 sup {
   font-style: italic;
   color: plum;
 }
+
+.spinner div {
+  margin: 2em auto;
+}

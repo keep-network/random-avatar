@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Avatar from 'avataaars';
 import Network from './network';
 import { getKeepRandomBeaconImplementation } from './contracts';
+import { BounceLoader } from 'react-spinners';
 
 class App extends Component {
 
@@ -23,6 +23,7 @@ class App extends Component {
       mouthType: ['Concerned', 'Default', 'Disbelief','Eating', 'Grimace', 'Sad', 'ScreamOpen', 'Serious', 'Smile', 'Tongue', 'Twinkle', 'Vomit'],
       skinColor: ['Tanned', 'Yellow', 'Pale', 'Light', 'Brown', 'DarkBrown', 'Black']
     }
+    this.state.loading = false;
   }
 
   componentDidMount() {
@@ -30,6 +31,9 @@ class App extends Component {
   }
 
   async requestRelayEntry() {
+    this.setState({
+      loading: true
+    });
     await this.state.randomBeacon.requestRelayEntry(0, 0, {from: this.state.yourAddress, gas: 150000});
   }
 
@@ -41,23 +45,31 @@ class App extends Component {
           <h1 className="m-5">Random avatar <sup>on blockchain</sup></h1>
         </header>
         <button className="btn btn-lg btn-secondary mb-5" onClick={this.requestRelayEntry.bind(this)}>Get random avatar!</button>
-        <div className="avatar">
-          <Avatar
-            style={{width: '400px', height: '400px'}}
-            avatarStyle='Circle'
-            topType={topType}
-            hatColor={hatColor}
-            accessoriesType={accessoriesType}
-            hairColor={hairColor}
-            facialHairType={facialHairType}
-            clotheType={clotheType}
-            clotheColor={clotheColor}
-            eyeType={eyeType}
-            eyebrowType={eyebrowType}
-            mouthType={mouthType}
-            skinColor={skinColor}
-          />
-        </div>
+        { this.state.loading ?
+          <div className="spinner">
+            <BounceLoader
+              color={'#6c757d'}
+              loading={this.state.loading}
+            />
+          </div>:
+          <div className="avatar">
+            <Avatar
+              style={{width: '400px', height: '400px'}}
+              avatarStyle='Circle'
+              topType={topType}
+              hatColor={hatColor}
+              accessoriesType={accessoriesType}
+              hairColor={hairColor}
+              facialHairType={facialHairType}
+              clotheType={clotheType}
+              clotheColor={clotheColor}
+              eyeType={eyeType}
+              eyebrowType={eyebrowType}
+              mouthType={mouthType}
+              skinColor={skinColor}
+            />
+          </div>
+        }
       </div>
     );
   }
@@ -85,7 +97,8 @@ class App extends Component {
         eyeType: this.options.eyeType[randomBigNumber.modulo(this.options.eyeType.length).toFixed()],
         eyebrowType: this.options.eyebrowType[randomBigNumber.modulo(this.options.eyebrowType.length).toFixed()],
         mouthType: this.options.mouthType[randomBigNumber.modulo(this.options.mouthType.length).toFixed()],
-        skinColor: this.options.skinColor[randomBigNumber.modulo(this.options.skinColor.length).toFixed()]
+        skinColor: this.options.skinColor[randomBigNumber.modulo(this.options.skinColor.length).toFixed()],
+        loading: false
       });
     });
 
