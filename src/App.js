@@ -31,10 +31,12 @@ class App extends Component {
   }
 
   async requestRelayEntry() {
+    let request = await this.state.randomBeacon.requestRelayEntry(0, 0, {from: this.state.yourAddress, gas: 150000});
+    let requestId = request.logs[0].args.requestID.toNumber();
     this.setState({
-      loading: true
+      loading: true,
+      requestId: requestId
     });
-    await this.state.randomBeacon.requestRelayEntry(0, 0, {from: this.state.yourAddress, gas: 150000});
   }
 
   render() {
@@ -85,21 +87,23 @@ class App extends Component {
 
     // Attach event listener
     randomBeacon.RelayEntryGenerated().watch((error, result) => {
-      let randomBigNumber = result.args.requestResponse;
-      this.setState({
-        topType: this.options.topType[randomBigNumber.modulo(this.options.topType.length).toFixed()],
-        hatColor: this.options.hatColor[randomBigNumber.modulo(this.options.hatColor.length).toFixed()],
-        accessoriesType: this.options.accessoriesType[randomBigNumber.modulo(this.options.accessoriesType.length).toFixed()],
-        hairColor: this.options.hairColor[randomBigNumber.modulo(this.options.hairColor.length).toFixed()],
-        facialHairType: this.options.facialHairType[randomBigNumber.modulo(this.options.facialHairType.length).toFixed()],
-        clotheType: this.options.clotheType[randomBigNumber.modulo(this.options.clotheType.length).toFixed()],
-        clotheColor: this.options.clotheColor[randomBigNumber.modulo(this.options.clotheColor.length).toFixed()],
-        eyeType: this.options.eyeType[randomBigNumber.modulo(this.options.eyeType.length).toFixed()],
-        eyebrowType: this.options.eyebrowType[randomBigNumber.modulo(this.options.eyebrowType.length).toFixed()],
-        mouthType: this.options.mouthType[randomBigNumber.modulo(this.options.mouthType.length).toFixed()],
-        skinColor: this.options.skinColor[randomBigNumber.modulo(this.options.skinColor.length).toFixed()],
-        loading: false
-      });
+      if (result.args.requestID.toNumber() === this.state.requestId) {
+        let randomBigNumber = result.args.requestResponse;
+        this.setState({
+          topType: this.options.topType[randomBigNumber.modulo(this.options.topType.length).toFixed()],
+          hatColor: this.options.hatColor[randomBigNumber.modulo(this.options.hatColor.length).toFixed()],
+          accessoriesType: this.options.accessoriesType[randomBigNumber.modulo(this.options.accessoriesType.length).toFixed()],
+          hairColor: this.options.hairColor[randomBigNumber.modulo(this.options.hairColor.length).toFixed()],
+          facialHairType: this.options.facialHairType[randomBigNumber.modulo(this.options.facialHairType.length).toFixed()],
+          clotheType: this.options.clotheType[randomBigNumber.modulo(this.options.clotheType.length).toFixed()],
+          clotheColor: this.options.clotheColor[randomBigNumber.modulo(this.options.clotheColor.length).toFixed()],
+          eyeType: this.options.eyeType[randomBigNumber.modulo(this.options.eyeType.length).toFixed()],
+          eyebrowType: this.options.eyebrowType[randomBigNumber.modulo(this.options.eyebrowType.length).toFixed()],
+          mouthType: this.options.mouthType[randomBigNumber.modulo(this.options.mouthType.length).toFixed()],
+          skinColor: this.options.skinColor[randomBigNumber.modulo(this.options.skinColor.length).toFixed()],
+          loading: false
+        });
+      }
     });
 
     this.setState({
