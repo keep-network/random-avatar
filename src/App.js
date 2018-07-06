@@ -7,8 +7,17 @@ import { getKeepRandomBeaconImplementation } from './contracts';
 
 class App extends Component {
 
+  constructor() {
+    super()
+    this.state = {};
+  }
+
   componentDidMount() {
     this.getData();
+  }
+
+  async requestRelayEntry() {
+    await this.state.randomBeacon.requestRelayEntry(0, 0, {from: this.state.yourAddress, gas: 150000});
   }
 
   render() {
@@ -18,6 +27,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
+        <button onClick={this.requestRelayEntry.bind(this)}>get random number</button>
         <p className="App-intro">
           <Avatar
             style={{width: '300px', height: '300px'}}
@@ -47,7 +57,10 @@ class App extends Component {
     // Contracts
     const randomBeacon = await getKeepRandomBeaconImplementation(process.env.REACT_APP_RANDOM_BEACON_ADDRESS);
 
-    this.setState();
+    this.setState({
+      yourAddress,
+      randomBeacon
+    });
   }
 }
 
