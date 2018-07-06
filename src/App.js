@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Avatar from 'avataaars';
 import Network from './network';
-import { getKeepRandomBeacon, getKeepRandomBeaconImplementation } from './contracts';
+import { getKeepRandomBeaconImplementation } from './contracts';
 
 class App extends Component {
 
@@ -45,8 +45,7 @@ class App extends Component {
     const yourAddress = accounts[0];
 
     // Contracts
-    const keepRandomBeacon = await getKeepRandomBeacon(process.env.REACT_APP_RANDOM_BEACON_ADDRESS);
-    const keepRandomBeaconImplementation = await getKeepRandomBeaconImplementation(process.env.REACT_APP_RANDOM_BEACON_IMPLEMENTATION_ADDRESS);
+    const randomBeacon = await getKeepRandomBeaconImplementation(process.env.REACT_APP_RANDOM_BEACON_ADDRESS);
 
     this.setState();
   }
