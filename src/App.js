@@ -73,6 +73,24 @@ class App extends Component {
     // Contracts
     const randomBeacon = await getKeepRandomBeaconImplementation(process.env.REACT_APP_RANDOM_BEACON_ADDRESS);
 
+    // Attach event listener
+    randomBeacon.RelayEntryGenerated().watch((error, result) => {
+      let randomBigNumber = result.args.requestResponse;
+      this.setState({
+        topType: this.options.topType[randomBigNumber.modulo(this.options.topType.length).toFixed()],
+        hatColor: this.options.hatColor[randomBigNumber.modulo(this.options.hatColor.length).toFixed()],
+        accessoriesType: this.options.accessoriesType[randomBigNumber.modulo(this.options.accessoriesType.length).toFixed()],
+        hairColor: this.options.hairColor[randomBigNumber.modulo(this.options.hairColor.length).toFixed()],
+        facialHairType: this.options.facialHairType[randomBigNumber.modulo(this.options.facialHairType.length).toFixed()],
+        clotheType: this.options.clotheType[randomBigNumber.modulo(this.options.clotheType.length).toFixed()],
+        clotheColor: this.options.clotheColor[randomBigNumber.modulo(this.options.clotheColor.length).toFixed()],
+        eyeType: this.options.eyeType[randomBigNumber.modulo(this.options.eyeType.length).toFixed()],
+        eyebrowType: this.options.eyebrowType[randomBigNumber.modulo(this.options.eyebrowType.length).toFixed()],
+        mouthType: this.options.mouthType[randomBigNumber.modulo(this.options.mouthType.length).toFixed()],
+        skinColor: this.options.skinColor[randomBigNumber.modulo(this.options.skinColor.length).toFixed()]
+      });
+    });
+
     this.setState({
       yourAddress,
       randomBeacon
