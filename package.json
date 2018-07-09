@@ -20,7 +20,8 @@
     "start": "npm run env && require-link && react-scripts start",
     "build": "require-link && react-scripts build",
     "test": "require-link && react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "demo": "truffle migrate --reset && npm run start"
   },
   "requireSymlinks": {
     "contracts": "./build/contracts"
