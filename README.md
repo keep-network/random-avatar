@@ -6,7 +6,7 @@ A react web app to demo Keep Random Beacon contract.
 
 #### MacOS
 
-* Install [Ganache](http://truffleframework.com/ganache/) and [Brew](https://brew.sh/)
+* Install [Ganache](https://github.com/trufflesuite/ganache/releases/download/v1.2.1/Ganache-1.2.1-mac.zip) and [Brew](https://brew.sh/)
 * Install node.js via brew `brew install node`
 * Install the required packages `npm install`
 * Run Ganache as your local Ethereum testnet.
