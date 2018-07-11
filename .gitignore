@@ -6,6 +6,7 @@
 
 # production
 /build
+/contracts/output
 
 # misc
 .DS_Store
