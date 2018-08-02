@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
@@ -22,7 +22,7 @@ contract KeepRandomBeacon is Ownable {
     event SubmitGroupPublicKeyEvent(byte[] groupPublicKey, uint256 requestID, uint256 activationBlockHeight);
 
     constructor(address _implementation) public {
-        require(_implementation != address(0));
+        require(_implementation != address(0), "Implementation address can't be zero.");
         setImplementation(_implementation);
     }
 
@@ -75,8 +75,8 @@ contract KeepRandomBeacon is Ownable {
         onlyOwner
     {
         address currentImplementation = implementation();
-        require(_implementation != address(0));
-        require(_implementation != currentImplementation);
+        require(_implementation != address(0), "Implementation address can't be zero.");
+        require(_implementation != currentImplementation, "Implementation address must be different from the current one.");
         setImplementation(_implementation);
         emit Upgraded(_implementation);
     }

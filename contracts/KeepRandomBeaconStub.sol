@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.24;
 
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
@@ -24,7 +24,7 @@ contract KeepRandomBeaconStub is Ownable {
      * @dev Prevent receiving ether without explicitly calling a function.
      */
     function() public payable {
-        revert();
+        revert("Can not call contract without explicitly calling a function.");
     }
 
     /**
@@ -34,7 +34,7 @@ contract KeepRandomBeaconStub is Ownable {
         public
         onlyOwner
     {
-        require(!initialized());
+        require(!initialized(), "Contract is already initialized.");
         _initialized["KeepRandomBeaconStub"] = true;
     }
 
