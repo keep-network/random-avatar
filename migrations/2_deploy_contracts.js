@@ -4,6 +4,6 @@ const KeepRandomBeaconStub = artifacts.require("./KeepRandomBeaconStub.sol");
 module.exports = function(deployer) {
   deployer.deploy(KeepRandomBeaconStub)
     .then(function() {
-      return deployer.deploy(KeepRandomBeacon, 'v1', KeepRandomBeaconStub.address);
+      return deployer.deploy(KeepRandomBeacon, KeepRandomBeaconStub.address);
     });
 };
