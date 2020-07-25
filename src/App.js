@@ -27,6 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    await window.ethereum.enable();
     this.getData();
   }
 
