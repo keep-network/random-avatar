@@ -6,7 +6,7 @@
     "avataaars": "^1.1.0",
     "bignumber": "^1.1.0",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.4.2",
     "react-scripts": "1.1.4",
     "react-spinners": "^0.3.2",
     "require-symlink": "^0.2.0",
